@@ -1,23 +1,23 @@
-const GoogleSpreadSheet = require("google-spreadsheet");
-const { promisify } = require("util");
+const { GoogleSpreadsheet } = require("google-spreadsheet");
 const creds = require("./client_secret.json");
 
 GoogleSheetsController = {
   getCampaings: async function accessSpreadsheet(amount) {
     const campaigns = [];
-    const doc = new GoogleSpreadSheet(
+    const doc = new GoogleSpreadsheet(
       "1qFJzC_RkAjwMLu2xFMmZORFAoFW0AtHByDlSkbrJ1X4"
     );
-    await promisify(doc.useServiceAccountAuth)(creds);
-    const info = await promisify(doc.getInfo)();
-    const campaingsSheet = info.worksheets[1];
-    const cells = await promisify(campaingsSheet.getCells)({
-      "min-row": 2,
-      "max-row": 2 + (amount - 1),
-      "min-col": 24,
-      "max-col": 24
+    await doc.useServiceAccountAuth(creds);
+    await doc.loadInfo();
+    const campaingsSheet = doc.sheetsByIndex[1];
+    await campaingsSheet.loadCells({
+      startRowIndex: 1,
+      endRowIndex: 1 + amount,
+      startColumnIndex: 23,
+      endColumnIndex: 24
     });
-    for (const cell of cells) {
+    for (let i = 0; i < amount; i++) {
+      const cell = campaingsSheet.getCell(1 + i, 23);
       let campaign = JSON.parse(cell.value);
       campaigns.push(campaign);
     }

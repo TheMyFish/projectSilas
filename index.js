@@ -35,7 +35,7 @@ async function init() {
             await page.goto("https://panel.soclminer.com.br");
             await FacebookLoginController.facebookLogin(browser, page);
             // wait panel to load
-            await page.waitFor("#bt-menu");
+            await page.waitForSelector("#bt-menu");
 
             optionCheck(answer1, browser, page, amount);
           })();
@@ -63,8 +63,8 @@ async function optionCheck(option, browser, page, amount) {
   console.log("");
   console.log("Upload concluído!");
   console.log("");
-  await page.waitFor("#bt-menu");
-  await page.waitFor(4000);
+  await page.waitForSelector("#bt-menu");
+  await page.waitForTimeout(4000);
   //await browser.close();
   // process.exit();
 
@@ -79,8 +79,8 @@ async function optionCheck(option, browser, page, amount) {
   console.log("");
   console.log("Upload concluído!");
   console.log("");
-  await page.waitFor("#bt-menu");
-  await page.waitFor(4000);
+  await page.waitForSelector("#bt-menu");
+  await page.waitForTimeout(4000);
   //await browser.close();
   // process.exit();
 
