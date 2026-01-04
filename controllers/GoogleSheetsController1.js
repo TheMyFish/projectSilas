@@ -25,4 +25,4 @@ GoogleSheetsController1 = {
   }
 };
 
-module.exports = GoogleSheetsController;
+module.exports = GoogleSheetsController1;
