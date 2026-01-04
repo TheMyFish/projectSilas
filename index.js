@@ -56,25 +56,12 @@ async function init() {
 async function optionCheck(option, browser, page, amount) {
   if (option == "1") {
     await CreateCampaignController.campaignCreator(page, amount);
-  } else {
-    console.log("Script ainda não disponível!");
-    await browser.close();
-  }
-  console.log("");
-  console.log("Upload concluído!");
-  console.log("");
-  await page.waitForSelector("#bt-menu");
-  await page.waitForTimeout(4000);
-  //await browser.close();
-  // process.exit();
-
-//const types = ["campanhas", "onsites", "bounces", "optins"]
-async function optionCheck(option, browser, page, amount) {
-  if (option == "2") {
+  } else if (option == "2") {
     await CreateOnsiteController.campaignCreator(page, amount);
   } else {
     console.log("Script ainda não disponível!");
     await browser.close();
+    return;
   }
   console.log("");
   console.log("Upload concluído!");
@@ -83,7 +70,4 @@ async function optionCheck(option, browser, page, amount) {
   await page.waitForTimeout(4000);
   //await browser.close();
   // process.exit();
-
-}
-
 }
